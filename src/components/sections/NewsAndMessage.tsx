@@ -33,7 +33,7 @@ const NewsAndMessage: React.FC = () => {
       excerpt: 'L\'entrepreneuriat gabonais rayonne ! Découvrez comment nos compatriotes de Yaoundé, Bangui et N\'Djamena créent des ponts commerciaux innovants. De l\'artisanat traditionnel aux nouvelles technologies, leurs initiatives transforment l\'économie régionale tout en préservant notre identité culturelle.',
       date: '12 Mars 2025',
       lieu: 'Yaoundé, Cameroun',
-      category: 'Communauté',
+      category: 'Économie',
       type: 'article',
       image: '/images/news/economie.jpg',
       slug: 'marche-solidaire-entrepreneurs'
@@ -59,122 +59,160 @@ const NewsAndMessage: React.FC = () => {
       type: 'album',
       image: '/images/news/education.jpg',
       slug: 'bourse-excellence-etudiants'
+    },
+    {
+      id: '5',
+      title: 'Forum économique de la diaspora à Lagos',
+      excerpt: 'Networking et échanges fructueux ! Plus de 300 entrepreneurs gabonais se sont réunis pour renforcer les liens commerciaux inter-africains. Discussions stratégiques, partenariats innovants et vision d\'avenir ont marqué cette rencontre exceptionnelle qui ouvre de nouvelles perspectives.',
+      date: '2 Mars 2025',
+      lieu: 'Lagos, Nigeria',
+      category: 'Économie',
+      type: 'article',
+      image: '/images/news/forum.jpg',
+      slug: 'forum-economique-lagos'
+    },
+    {
+      id: '6',
+      title: 'Célébration de l\'indépendance à Kinshasa',
+      excerpt: 'Une fête inoubliable ! La communauté gabonaise de Kinshasa a célébré avec fierté les 65 ans d\'indépendance de notre nation. Défilés colorés, hymnes patriotiques et moments de recueillement ont rythmé cette journée mémorable qui renforce notre sentiment d\'appartenance.',
+      date: '28 Février 2025',
+      lieu: 'Kinshasa, RDC',
+      category: 'Culture',
+      type: 'album',
+      image: '/images/news/independance.jpg',
+      slug: 'celebration-independance-kinshasa'
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Colonne gauche - Actualités */}
-          <div>
-            <h2 className="font-inter text-3xl font-bold text-black mb-8">
+    <section className="bg-white" style={{ paddingTop: '15px', paddingBottom: '80px' }}>
+      <div className="w-full px-6">
+        <div className="flex justify-center">
+          <div className="w-full max-w-[1000px] mx-auto">
+            {/* Titre global centré */}
+            <h2 className="font-inter text-3xl font-bold text-black mb-6 text-center">
               Actualités récentes
             </h2>
 
-            <div className="space-y-6">
-              {newsItems.map((item) => (
-                <article
-                  key={item.id}
-                  className="bg-white cursor-pointer transition-all duration-200 border border-gray-200 p-5"
-                  onClick={() => {
-                    const baseUrl = item.type === 'article' ? '/actualites' : '/medias';
-                    window.location.href = `${baseUrl}/${item.slug}`;
-                  }}
-                >
-                  <div className="flex gap-4">
-                    {/* Image à gauche */}
-                    <div className="relative bg-gray-100 overflow-hidden flex-shrink-0 w-24 h-24">
+            {/* Grille principale : 3 colonnes actualités + 1 colonne lettre */}
+            <div className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8 items-start">
+              {/* Zone Actualités - 2 colonnes × 3 lignes */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {newsItems.map((item) => (
+                  <article
+                    key={item.id}
+                    className="bg-white cursor-pointer transition-all duration-200 border border-gray-200 hover:border-gray-300 flex flex-col"
+                    style={{ minHeight: '350px' }}
+                    onClick={() => {
+                      const baseUrl = item.type === 'article' ? '/actualites' : '/medias';
+                      window.location.href = `${baseUrl}/${item.slug}`;
+                    }}
+                  >
+                    {/* Image en haut - ratio 16:9, centrée */}
+                    <div className="relative bg-gray-100 overflow-hidden" style={{ aspectRatio: '16/9' }}>
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                        <span className="font-inter text-xs font-medium text-gray-600 text-center">
-                          {item.type === 'video' ? '🎥' : item.type === 'album' ? '📸' : '📰'}
+                        <span className="font-inter text-sm font-medium text-gray-600 text-center">
+                          {item.type === 'video' ? '🎥 Vidéo' : item.type === 'album' ? '📸 Album' : '📰 Article'}
+                          <br />
+                          <span className="text-xs">{item.lieu}</span>
                         </span>
                       </div>
                     </div>
 
-                    {/* Contenu à droite */}
-                    <div className="flex-1">
-                      <h3 className="font-inter text-lg font-bold text-black mb-2">
+                    {/* Contenu de la carte */}
+                    <div className="p-5 flex flex-col h-full">
+                      {/* Tag catégorie - centré */}
+                      <div className="text-center mb-3">
+                        <span className="inline-block font-inter text-xs font-medium text-white bg-primary px-3 py-1 rounded">
+                          {item.category}
+                        </span>
+                      </div>
+
+                      {/* Titre - centré */}
+                      <h3 className="font-inter text-lg font-bold text-black mb-3 text-center line-clamp-2">
                         {item.title}
                       </h3>
 
-                      <p className="font-inter text-sm text-gray-700 mb-3 leading-relaxed">
-                        {item.excerpt.substring(0, 100)}...
+                      {/* Extrait - justifié */}
+                      <p className="font-inter text-sm text-gray-700 mb-4 leading-relaxed flex-1" style={{ textAlign: 'justify' }}>
+                        {item.excerpt}
                       </p>
 
-                      <div className="flex justify-between items-center">
-                        <span className="font-inter text-xs text-gray-500">
-                          {item.date} • {item.lieu}
-                        </span>
-
-                        <button
-                          className="font-inter text-sm font-medium text-primary hover:underline"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const baseUrl = item.type === 'article' ? '/actualites' : '/medias';
-                            window.location.href = `${baseUrl}/${item.slug}`;
-                          }}
-                        >
-                          Lire →
-                        </button>
+                      {/* Bas de carte */}
+                      <div className="mt-auto border-t border-gray-100 pt-3">
+                        <div className="flex justify-between items-center">
+                          <span className="font-inter text-xs text-gray-500">
+                            {item.date}
+                          </span>
+                          <button
+                            className="font-inter text-sm font-medium text-primary hover:underline"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const baseUrl = item.type === 'article' ? '/actualites' : '/medias';
+                              window.location.href = `${baseUrl}/${item.slug}`;
+                            }}
+                          >
+                            Lire la suite →
+                          </button>
+                        </div>
                       </div>
                     </div>
+                  </article>
+                ))}
+              </div>
+
+              {/* Colonne droite - Lettre de la candidate */}
+              <div className="bg-white border border-gray-200 p-6" style={{ minHeight: '600px' }}>
+                {/* Photo portrait centrée */}
+                <div className="mb-4 text-center">
+                  <div className="bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center mx-auto aspect-[3/4] max-w-[180px] w-full">
+                    <span className="font-inter text-sm font-medium text-gray-600 text-center">
+                      Portrait officiel
+                      <br />
+                      Angelina Charlotte
+                      <br />
+                      Nongou-Mavikana
+                    </span>
                   </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* Colonne droite - Lettre de la candidate */}
-          <div>
-            <div className="bg-white border border-gray-200 p-6">
-              {/* Photo portrait centrée */}
-              <div className="mb-6 text-center">
-                <div className="bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center mx-auto aspect-[3/4] max-w-[250px] w-full">
-                  <span className="font-inter text-sm font-medium text-gray-600">
-                    Portrait officiel
-                    <br />
-                    Angelina
-                  </span>
                 </div>
-              </div>
 
-              {/* Nom complet */}
-              <div className="text-center mb-4">
-                <h3 className="font-inter text-lg font-bold text-black">
-                  Angelina Charlotte Nongou-Mavikana
-                  <br />
-                  <span className="font-inter text-base font-normal text-gray-700">
-                    (ép. Leyenberger)
-                  </span>
-                </h3>
-              </div>
+                {/* Nom complet */}
+                <div className="text-center mb-3">
+                  <h3 className="font-inter text-sm font-bold text-black">
+                    Angelina Charlotte Nongou-Mavikana
+                    <br />
+                    <span className="font-inter text-xs font-normal text-gray-700">
+                      (ép. Leyenberger)
+                    </span>
+                  </h3>
+                </div>
 
-              {/* Sous-titre */}
-              <div className="text-center mb-6">
-                <h4 className="font-inter text-xl font-bold text-primary">
-                  Lettre aux citoyens
-                </h4>
-              </div>
+                {/* Sous-titre */}
+                <div className="text-center mb-4">
+                  <h4 className="font-inter text-lg font-bold text-primary">
+                    Lettre aux citoyens
+                  </h4>
+                </div>
 
-              {/* Texte introductif */}
-              <div className="mb-6 space-y-4">
-                <p className="font-inter text-base text-gray-700 leading-relaxed">
-                  "Chères et chers compatriotes dispersés aux quatre coins de l'Afrique, votre courage et votre détermination font de vous les ambassadeurs authentiques de notre belle nation gabonaise."
-                </p>
-                <p className="font-inter text-base text-gray-700 leading-relaxed">
-                  "Votre réussite dans vos pays d'accueil honore le Gabon et tisse des liens précieux entre nos peuples frères."
-                </p>
-              </div>
+                {/* Texte introductif */}
+                <div className="mb-4 space-y-3">
+                  <p className="font-inter text-sm text-gray-700 leading-relaxed" style={{ textAlign: 'justify' }}>
+                    "Chères et chers compatriotes dispersés aux quatre coins de l'Afrique, votre courage et votre détermination font de vous les ambassadeurs authentiques de notre belle nation gabonaise."
+                  </p>
+                  <p className="font-inter text-sm text-gray-700 leading-relaxed" style={{ textAlign: 'justify' }}>
+                    "Votre réussite dans vos pays d'accueil honore le Gabon et tisse des liens précieux entre nos peuples frères."
+                  </p>
+                </div>
 
-              {/* Lien en bas */}
-              <div className="text-left">
-                <button
-                  className="font-inter text-base font-medium text-primary hover:underline transition-all duration-200"
-                  onClick={() => window.location.href = '/programme'}
-                >
-                  Lire la suite →
-                </button>
+                {/* Lien en bas */}
+                <div className="text-center mt-auto">
+                  <button
+                    className="font-inter text-sm font-medium text-primary hover:underline transition-all duration-200"
+                    onClick={() => window.location.href = '/programme'}
+                  >
+                    Lire la suite →
+                  </button>
+                </div>
               </div>
             </div>
           </div>

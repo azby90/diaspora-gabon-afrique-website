@@ -9,12 +9,13 @@ import { navigationItems } from '@/types/navigation';
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      setScrolled(isScrolled);
+      const scrolled = window.scrollY > 50;
+      setIsScrolled(scrolled);
     };
 
     window.addEventListener('scroll', handleScroll);

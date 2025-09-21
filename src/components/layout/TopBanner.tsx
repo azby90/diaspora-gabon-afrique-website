@@ -37,7 +37,7 @@ const TopBanner: React.FC = () => {
     <div
       className="w-full fixed top-0 z-50"
       style={{
-        backgroundColor: 'rgba(10, 122, 59, 0.95)',
+        backgroundColor: '#006400',
         backdropFilter: 'blur(8px)',
         height: '44px',
         borderBottom: 'none',

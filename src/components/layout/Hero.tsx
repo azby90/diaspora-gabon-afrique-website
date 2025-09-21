@@ -53,25 +53,36 @@ const Hero: React.FC = () => {
             </h2>
 
             {/* Description */}
-            <p className="font-inter text-white mb-10 text-lg md:text-xl max-w-3xl mx-auto opacity-95" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.8)' }}>
+            <p className="font-inter text-white mb-8 text-lg md:text-xl max-w-3xl mx-auto opacity-95" style={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.8)' }}>
               Représenter dignement plus de 50 pays d'Afrique au Parlement gabonais
             </p>
 
-            {/* Boutons CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* Bouton CTA unique */}
+            <div className="flex justify-center" style={{ marginTop: '25px' }}>
               <a
-                href="/contact-simpliquer"
-                className="inline-flex items-center justify-center font-inter text-base font-semibold bg-primary text-white hover:bg-primary-600 px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105"
-                style={{ boxShadow: '0 4px 20px rgba(10, 122, 59, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4)' }}
+                href="/programme"
+                className="inline-flex items-center justify-center font-inter font-bold transition-all duration-300 hover:scale-105"
+                style={{
+                  fontSize: '17px',
+                  backgroundColor: '#0A7A3B',
+                  color: '#FFFFFF',
+                  paddingTop: '12px',
+                  paddingBottom: '12px',
+                  paddingLeft: '24px',
+                  paddingRight: '24px',
+                  borderRadius: '6px',
+                  border: 'none',
+                  boxShadow: '0 4px 20px rgba(10, 122, 59, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4)',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#086a32';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#0A7A3B';
+                }}
               >
-                Rejoindre la Campagne
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center justify-center font-inter text-base font-semibold border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-xl transition-all duration-300"
-                style={{ textShadow: 'none' }}
-              >
-                S'abonner aux Actualités
+                Découvrir Notre Programme
               </a>
             </div>
           </div>
