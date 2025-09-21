@@ -81,15 +81,15 @@ const candidatesData: Candidate[] = [
       whatsapp: 'https://wa.me/33612345679'
     },
     biography: {
-      academic: {
+      introduction: {
         title: 'Formation et expertise',
         content: 'Ingénieur diplômé de l\'École Polytechnique de Libreville, M. Koumba Koudel s\'est spécialisé dans le développement des infrastructures et l\'aménagement du territoire. Il possède également une certification avancée en gestion de projets internationaux délivrée par l\'Institut de Management de Projets de Londres, ainsi qu\'un diplôme complémentaire en développement durable.'
       },
-      professional: {
+      engagement: {
         title: 'Expérience professionnelle',
         content: 'Avec plus de vingt années d\'expérience dans les secteurs privé et public, il a dirigé plusieurs projets d\'envergure nationale, notamment dans les domaines des transports, de l\'énergie et des télécommunications. Son expertise technique est reconnue au niveau sous-régional. Il a occupé des fonctions de direction au sein de grandes entreprises gabonaises et a conseillé plusieurs collectivités locales dans leurs projets de développement territorial.'
       },
-      engagement: {
+      political: {
         title: 'Engagement communautaire',
         content: 'Homme de terrain, M. Koumba Koudel s\'investit depuis de nombreuses années dans le développement communautaire. Il coordonne plusieurs initiatives locales visant à améliorer l\'accès à l\'eau potable et à l\'électricité dans les zones rurales. Il est également fondateur d\'une organisation non gouvernementale qui promeut l\'éducation technique et professionnelle auprès des jeunes, convaincu que la formation constitue la clé du développement économique durable.'
       },
