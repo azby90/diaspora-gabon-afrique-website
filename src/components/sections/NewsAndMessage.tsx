@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import FacebookPostsBlock from '@/components/social/FacebookPostsBlock';
 
 interface NewsItem {
   id: string;
@@ -15,6 +16,7 @@ interface NewsItem {
 }
 
 const NewsAndMessage: React.FC = () => {
+
   const newsItems: NewsItem[] = [
     {
       id: '1',
@@ -94,10 +96,29 @@ const NewsAndMessage: React.FC = () => {
               Actualités récentes
             </h2>
 
-            {/* Grille principale : 3 colonnes actualités + 1 colonne lettre */}
-            <div className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8 items-start">
-              {/* Zone Actualités - 2 colonnes × 3 lignes */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Grille principale : Actualités + Facebook */}
+            <div className="w-full">
+              {/* Section Facebook Feed */}
+              <div className="mb-12">
+                <h3 className="font-inter text-2xl font-semibold text-black mb-6 text-center">
+                  Dernières publications Facebook
+                </h3>
+                <div className="max-w-[800px] mx-auto">
+                  <FacebookPostsBlock
+                    pageId="61579187160785"
+                    limit={5}
+                    variant="compact"
+                  />
+                </div>
+              </div>
+
+              {/* Zone Actualités - 3 colonnes */}
+              <div className="mb-8">
+                <h3 className="font-inter text-2xl font-semibold text-black mb-6 text-center">
+                  Autres actualités
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {newsItems.map((item) => (
                   <article
                     key={item.id}
@@ -159,60 +180,6 @@ const NewsAndMessage: React.FC = () => {
                     </div>
                   </article>
                 ))}
-              </div>
-
-              {/* Colonne droite - Lettre de la candidate */}
-              <div className="bg-white border border-gray-200 p-6" style={{ minHeight: '600px' }}>
-                {/* Photo portrait centrée */}
-                <div className="mb-4 text-center">
-                  <div className="bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center mx-auto aspect-[3/4] max-w-[180px] w-full">
-                    <span className="font-inter text-sm font-medium text-gray-600 text-center">
-                      Portrait officiel
-                      <br />
-                      Angelina Charlotte
-                      <br />
-                      Nongou-Mavikana
-                    </span>
-                  </div>
-                </div>
-
-                {/* Nom complet */}
-                <div className="text-center mb-3">
-                  <h3 className="font-inter text-sm font-bold text-black">
-                    Angelina Charlotte Nongou-Mavikana
-                    <br />
-                    <span className="font-inter text-xs font-normal text-gray-700">
-                      (ép. Leyenberger)
-                    </span>
-                  </h3>
-                </div>
-
-                {/* Sous-titre */}
-                <div className="text-center mb-4">
-                  <h4 className="font-inter text-lg font-bold text-primary">
-                    Lettre aux citoyens
-                  </h4>
-                </div>
-
-                {/* Texte introductif */}
-                <div className="mb-4 space-y-3">
-                  <p className="font-inter text-sm text-gray-700 leading-relaxed" style={{ textAlign: 'justify' }}>
-                    "Chères et chers compatriotes dispersés aux quatre coins de l'Afrique, votre courage et votre détermination font de vous les ambassadeurs authentiques de notre belle nation gabonaise."
-                  </p>
-                  <p className="font-inter text-sm text-gray-700 leading-relaxed" style={{ textAlign: 'justify' }}>
-                    "Votre réussite dans vos pays d'accueil honore le Gabon et tisse des liens précieux entre nos peuples frères."
-                  </p>
-                </div>
-
-                {/* Lien en bas */}
-                <div className="text-center mt-auto">
-                  <button
-                    className="font-inter text-sm font-medium text-primary hover:underline transition-all duration-200"
-                    onClick={() => window.location.href = '/programme'}
-                  >
-                    Lire la suite →
-                  </button>
-                </div>
               </div>
             </div>
           </div>

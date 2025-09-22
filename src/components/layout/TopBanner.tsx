@@ -28,7 +28,6 @@ const TopBanner: React.FC = () => {
 
   const actionLinks = [
     { name: 'Programme', href: '/programme' },
-    { name: 'Agenda', href: '/communautes-agenda' },
     { name: 'FAQ électeurs', href: '/faq' },
     { name: 'Contact', href: '/contact-simpliquer' },
   ];

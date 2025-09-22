@@ -17,7 +17,8 @@
       "Bash(git commit:*)",
       "Bash(npx tsc:*)",
       "Bash(git merge:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

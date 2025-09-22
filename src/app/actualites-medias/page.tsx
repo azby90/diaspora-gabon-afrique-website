@@ -1,5 +1,6 @@
 import PageLayout from '@/components/layout/PageLayout';
 import Button from '@/components/ui/Button';
+import FacebookPostsBlock from '@/components/social/FacebookPostsBlock';
 
 const actualites = [
   {
@@ -85,6 +86,25 @@ export default function ActualitesMediasPage() {
               Suivez toute l&apos;actualité de notre campagne, nos rencontres avec les communautés
               et notre présence dans les médias.
             </p>
+          </div>
+
+          {/* Section Facebook d'Angélina */}
+          <div className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-primary mb-4">
+                Publications Facebook d'Angélina
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Suivez en temps réel les dernières actualités et publications d'Angélina directement depuis sa page Facebook officielle.
+              </p>
+            </div>
+            <div className="max-w-[900px] mx-auto">
+              <FacebookPostsBlock
+                pageId="61579187160785"
+                limit={4}
+                variant="card"
+              />
+            </div>
           </div>
 
           {/* Actualités Principales */}
