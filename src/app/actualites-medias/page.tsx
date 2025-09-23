@@ -1,275 +1,298 @@
-import PageLayout from '@/components/layout/PageLayout';
-import Button from '@/components/ui/Button';
-import FacebookPostsBlock from '@/components/social/FacebookPostsBlock';
+'use client';
 
-const actualites = [
+import { useState } from 'react';
+import PageLayout from '@/components/layout/PageLayout';
+
+const campagneArticles = [
   {
     id: 1,
-    title: 'Lancement Officiel de Notre Campagne',
-    excerpt: 'Nous avons officiellement lancé notre campagne pour représenter la diaspora gabonaise en Afrique lors d\'un événement mémorable à Libreville.',
-    date: '15 Septembre 2024',
-    category: 'Campagne',
-    imageUrl: '/placeholder-news-1.jpg',
-    readTime: '3 min de lecture'
+    title: "Rencontre historique avec la diaspora gabonaise de Johannesburg",
+    excerpt: "Une soirée d'échanges fructueuse avec nos compatriotes d'Afrique du Sud pour présenter notre vision pour l'Afrique et renforcer les liens avec la communauté gabonaise. Plus de 200 participants ont répondu présent pour cette première étape de notre tournée africaine.",
+    date: "2025-01-20",
+    author: "Équipe campagne",
+    categories: ["Déplacements", "Diaspora"],
+    image: "/images/placeholder-campaign.jpg",
+    slug: "rencontre-johannesburg",
+    comments: 12,
+    likes: 45,
+    views: 2840
   },
   {
     id: 2,
-    title: 'Rencontre avec la Communauté de Lagos',
-    excerpt: 'Une rencontre fructueuse avec plus de 200 membres de la communauté gabonaise de Lagos pour discuter de leurs préoccupations et attentes.',
-    date: '10 Septembre 2024',
-    category: 'Communauté',
-    imageUrl: '/placeholder-news-2.jpg',
-    readTime: '5 min de lecture'
+    title: "Communiqué officiel : Notre programme complet pour la diaspora africaine",
+    excerpt: "Présentation détaillée de nos 5 axes prioritaires pour renforcer les liens entre le Gabon et sa diaspora africaine. Un plan ambitieux qui place l'unité et la coopération au cœur de notre action politique pour les années à venir.",
+    date: "2025-01-18",
+    author: "Angelina Charlotte Nongou-Mavikana",
+    categories: ["Communiqués", "Programme"],
+    image: "/images/placeholder-campaign.jpg",
+    slug: "programme-diaspora",
+    comments: 8,
+    likes: 67,
+    views: 4150
   },
   {
     id: 3,
-    title: 'Partenariat avec l\'Union Africaine',
-    excerpt: 'Signature d\'un protocole d\'accord avec l\'Union Africaine pour renforcer la coopération en faveur de la diaspora gabonaise.',
-    date: '5 Septembre 2024',
-    category: 'Partenariat',
-    imageUrl: '/placeholder-news-3.jpg',
-    readTime: '4 min de lecture'
+    title: "Interview exclusive sur TV5 Afrique : Les enjeux de représentation",
+    excerpt: "Notre candidate s'exprime en direct sur les enjeux cruciaux de représentation de la diaspora gabonaise au sein des institutions africaines. Un entretien de 45 minutes qui aborde les défis et opportunités de notre communauté.",
+    date: "2025-01-15",
+    author: "TV5 Afrique",
+    categories: ["Médias", "Interviews"],
+    image: "/images/placeholder-campaign.jpg",
+    slug: "interview-tv5",
+    comments: 15,
+    likes: 89,
+    views: 6720
   },
   {
     id: 4,
-    title: 'Forum Économique : Résultats et Perspectives',
-    excerpt: 'Retour sur le forum économique de Douala qui a réuni entrepreneurs et investisseurs gabonais de toute l\'Afrique Centrale.',
-    date: '1er Septembre 2024',
-    category: 'Économie',
-    imageUrl: '/placeholder-news-4.jpg',
-    readTime: '6 min de lecture'
+    title: "Meeting exceptionnel à Dakar : Mobilisation réussie de la communauté",
+    excerpt: "Retour en images sur la rencontre exceptionnelle avec la communauté gabonaise de Dakar lors de notre tournée africaine. Une mobilisation impressionnante qui témoigne de l'engagement de nos compatriotes sénégalais.",
+    date: "2025-01-12",
+    author: "Correspondant Dakar",
+    categories: ["Événements", "Photos"],
+    image: "/images/placeholder-campaign.jpg",
+    slug: "meeting-dakar",
+    comments: 22,
+    likes: 134,
+    views: 5890
   }
 ];
 
-const medias = [
+const recentPosts = [
   {
-    type: 'Interview TV',
-    title: 'Interview sur Africa24 - Vision pour la Diaspora',
-    date: '12 Septembre 2024',
-    duration: '15 min',
-    platform: 'Africa24'
+    title: "Social Study Proves the Hostility Toward Women in Economics",
+    date: "2025-01-18",
+    image: "/images/placeholder-campaign.jpg",
+    slug: "study-hostility-women"
   },
   {
-    type: 'Podcast',
-    title: 'Podcast Africa Business - Entrepreneuriat en Diaspora',
-    date: '8 Septembre 2024',
-    duration: '25 min',
-    platform: 'Africa Business Radio'
+    title: "The Politicization of Military May Turn Dangerous",
+    date: "2025-01-15",
+    image: "/images/placeholder-campaign.jpg",
+    slug: "military-politicization"
   },
   {
-    type: 'Article de Presse',
-    title: 'Le Nouveau Gabon - "Une campagne prometteuse"',
-    date: '6 Septembre 2024',
-    duration: 'Article',
-    platform: 'Le Nouveau Gabon'
-  },
-  {
-    type: 'Interview Radio',
-    title: 'Radio Gabon International - Débat sur la représentation',
-    date: '3 Septembre 2024',
-    duration: '20 min',
-    platform: 'RGI'
+    title: "New Research Shows Climate Impact on African Communities",
+    date: "2025-01-12",
+    image: "/images/placeholder-campaign.jpg",
+    slug: "climate-impact-research"
   }
+];
+
+const archives = [
+  "Janvier 2025",
+  "Décembre 2024",
+  "Novembre 2024",
+  "Octobre 2024",
+  "Septembre 2024"
 ];
 
 export default function ActualitesMediasPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const formatShortDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+  };
+
   return (
     <PageLayout>
-      <div className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+      <div className="bg-gray-50 min-h-screen">
+        {/* Header style RightWay */}
+        <div className="bg-[#0A7A3B] text-white text-center py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <h1 className="text-4xl font-semibold mb-3">
               Actualités & Médias
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Suivez toute l&apos;actualité de notre campagne, nos rencontres avec les communautés
-              et notre présence dans les médias.
+            <p className="text-lg opacity-90">
+              Suivez l'actualité de la campagne d'Angelina Charlotte Nongou-Mavikana
             </p>
           </div>
+        </div>
 
-          {/* Section Facebook d'Angélina */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-primary mb-4">
-                Publications Facebook d'Angélina
-              </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Suivez en temps réel les dernières actualités et publications d'Angélina directement depuis sa page Facebook officielle.
-              </p>
-            </div>
-            <div className="max-w-[900px] mx-auto">
-              <FacebookPostsBlock
-                pageId="61579187160785"
-                limit={4}
-                variant="card"
-              />
-            </div>
-          </div>
+        {/* Conteneur principal CENTRÉ comme RightWay */}
+        <div className="flex justify-center min-h-screen bg-gray-50">
+          <main className="max-w-[1140px] w-full px-5 py-10">
+            <div className="grid lg:grid-cols-[2fr_1fr] gap-10 items-start">
 
-          {/* Actualités Principales */}
-          <div className="mb-20">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary">
-                Dernières Actualités
-              </h2>
-              <Button variant="outline" size="sm">
-                Voir toutes les actualités
-              </Button>
-            </div>
+            {/* COLONNE ARTICLES - style RightWay */}
+            <section className="bg-white rounded-lg shadow-lg">
+              {campagneArticles.map((article, index) => (
+                <article key={article.id} className={`${index !== campagneArticles.length - 1 ? 'border-b border-gray-200' : ''}`}>
+                  {/* Image large 16/9 */}
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className={`w-full h-64 object-cover ${index === 0 ? 'rounded-t-lg' : ''}`}
+                  />
 
-            {/* Article Principal */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-              <div className="lg:col-span-2">
-                <article className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="h-64 bg-primary-100 flex items-center justify-center">
-                    <span className="text-6xl">📰</span>
-                  </div>
-                  <div className="p-8">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <span className="px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium">
-                        Campagne
-                      </span>
-                      <span className="text-gray-500 text-sm">15 Septembre 2024</span>
-                      <span className="text-gray-500 text-sm">3 min de lecture</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-primary mb-4">
-                      Lancement Officiel de Notre Campagne
-                    </h3>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      Nous avons officiellement lancé notre campagne pour représenter la diaspora gabonaise
-                      en Afrique lors d&apos;un événement mémorable à Libreville. Plus de 500 personnes étaient
-                      présentes pour ce moment historique...
-                    </p>
-                    <Button variant="primary">
-                      Lire l&apos;article complet
-                    </Button>
-                  </div>
-                </article>
-              </div>
-
-              {/* Articles Secondaires */}
-              <div className="space-y-6">
-                {actualites.slice(1, 3).map((article) => (
-                  <article key={article.id} className="bg-white rounded-xl shadow-lg p-6">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        article.category === 'Communauté' ? 'bg-blue-100 text-blue-800' :
-                        article.category === 'Partenariat' ? 'bg-green-100 text-green-800' :
-                        'bg-purple-100 text-purple-800'
-                      }`}>
-                        {article.category}
-                      </span>
-                      <span className="text-gray-500 text-xs">{article.date}</span>
-                    </div>
-                    <h4 className="font-bold text-primary mb-2 leading-tight">
-                      {article.title}
-                    </h4>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                      {article.excerpt}
-                    </p>
-                    <Button variant="outline" size="sm">
-                      Lire plus
-                    </Button>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            {/* Autres Articles */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {actualites.slice(3).map((article) => (
-                <article key={article.id} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                  <div className="h-48 bg-primary-50 flex items-center justify-center">
-                    <span className="text-4xl">📸</span>
-                  </div>
                   <div className="p-6">
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        article.category === 'Économie' ? 'bg-orange-100 text-orange-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {article.category}
-                      </span>
-                      <span className="text-gray-500 text-xs">{article.readTime}</span>
+                    {/* Titre style RightWay */}
+                    <h2 className="text-2xl font-semibold text-[#0A7A3B] mb-2 leading-tight">
+                      <a
+                        href={`/actualites-medias/${article.slug}`}
+                        className="hover:text-[#085a2b] transition-colors"
+                      >
+                        {article.title}
+                      </a>
+                    </h2>
+
+                    {/* Méta style RightWay */}
+                    <div className="text-sm text-gray-600 mb-3">
+                      📅 {formatDate(article.date)} • 👤 par {article.author} • 🏷️ {article.categories.join(', ')}
                     </div>
-                    <h4 className="font-bold text-primary mb-2">
-                      {article.title}
-                    </h4>
-                    <p className="text-gray-600 text-sm mb-4">
+
+                    {/* Extrait */}
+                    <p className="text-gray-700 text-base leading-relaxed mb-4">
                       {article.excerpt}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-500 text-xs">{article.date}</span>
-                      <Button variant="outline" size="sm">
-                        Lire plus
-                      </Button>
+
+                    {/* Actions style RightWay */}
+                    <div className="flex justify-between items-center">
+                      <a
+                        href={`/actualites-medias/${article.slug}`}
+                        className="bg-[#F1C232] text-gray-900 px-5 py-2 rounded font-medium hover:bg-[#d4a929] transition-colors"
+                      >
+                        Lire la suite
+                      </a>
+
+                      <div className="text-sm text-gray-500">
+                        👁️ {article.views.toLocaleString()} vues • 💬 {article.comments} commentaires
+                      </div>
                     </div>
                   </div>
                 </article>
               ))}
-            </div>
-          </div>
+            </section>
 
-          {/* Section Médias */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-primary text-center mb-12">
-              Présence Médiatique
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {medias.map((media, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <div className="flex items-center mb-2">
-                        <span className={`w-3 h-3 rounded-full mr-2 ${
-                          media.type === 'Interview TV' ? 'bg-red-500' :
-                          media.type === 'Podcast' ? 'bg-purple-500' :
-                          media.type === 'Article de Presse' ? 'bg-blue-500' :
-                          'bg-green-500'
-                        }`}></span>
-                        <span className="text-sm font-medium text-gray-600">{media.type}</span>
-                      </div>
-                      <h3 className="font-semibold text-primary mb-2">
-                        {media.title}
-                      </h3>
-                      <div className="flex items-center text-sm text-gray-500 space-x-4">
-                        <span>📅 {media.date}</span>
-                        <span>⏱️ {media.duration}</span>
+
+            {/* SIDEBAR style RightWay */}
+            <aside className="flex flex-col gap-8">
+
+              {/* Bloc Recherche */}
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-lg font-semibold text-[#0A7A3B] mb-5 pb-3 border-b-2 border-[#F1C232]">
+                  Recherche
+                </h3>
+                <form className="relative">
+                  <input
+                    type="search"
+                    placeholder="Rechercher..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-4 pr-10 py-3 border-2 border-gray-200 rounded-md focus:border-[#0A7A3B] focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#0A7A3B]"
+                  >
+                    🔍
+                  </button>
+                </form>
+              </div>
+
+              {/* Bloc Archives */}
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-lg font-semibold text-[#0A7A3B] mb-5 pb-3 border-b-2 border-[#F1C232]">
+                  Archives
+                </h3>
+                <ul className="space-y-3">
+                  {archives.map((archive, index) => (
+                    <li key={index}>
+                      <a
+                        href="#"
+                        className="flex justify-between items-center text-gray-600 hover:text-[#0A7A3B] py-2 border-b border-gray-100 transition-colors"
+                      >
+                        <span>{archive}</span>
+                        <span className="text-sm text-gray-400">({8 + index})</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Publications récentes */}
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-lg font-semibold text-[#0A7A3B] mb-5 pb-3 border-b-2 border-[#F1C232]">
+                  Publications Récentes
+                </h3>
+                <div className="space-y-4">
+                  {recentPosts.map((post, index) => (
+                    <div key={index} className="flex gap-3 pb-4 border-b border-gray-100 last:border-b-0 last:pb-0">
+                      <img
+                        src={post.image}
+                        alt=""
+                        className="w-14 h-14 object-cover rounded flex-shrink-0"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-medium text-gray-900 hover:text-[#0A7A3B] leading-tight mb-1 cursor-pointer transition-colors">
+                          {post.title}
+                        </h4>
+                        <time className="text-xs text-gray-500">
+                          {formatShortDate(post.date)}
+                        </time>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-primary">{media.platform}</span>
-                    <Button variant="outline" size="sm">
-                      {media.type === 'Article de Presse' ? 'Lire' : 'Écouter/Voir'}
-                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Calendrier */}
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-lg font-semibold text-[#0A7A3B] mb-5 pb-3 border-b-2 border-[#F1C232]">
+                  Calendrier
+                </h3>
+                <div className="text-center">
+                  <div className="text-base font-semibold text-[#0A7A3B] mb-4">Janvier 2025</div>
+                  <div className="grid grid-cols-7 gap-1 text-sm">
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Lu</div>
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Ma</div>
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Me</div>
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Je</div>
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Ve</div>
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Sa</div>
+                    <div className="text-[#0A7A3B] font-semibold p-2 text-xs">Di</div>
+
+                    <div></div>
+                    <div></div>
+                    <div className="p-2 hover:bg-gray-100 rounded cursor-pointer">1</div>
+                    <div className="p-2 hover:bg-gray-100 rounded cursor-pointer">2</div>
+                    <div className="p-2 hover:bg-gray-100 rounded cursor-pointer">3</div>
+                    <div className="p-2 hover:bg-gray-100 rounded cursor-pointer">4</div>
+                    <div className="p-2 hover:bg-gray-100 rounded cursor-pointer">5</div>
+
+                    {Array.from({ length: 26 }, (_, i) => (
+                      <div
+                        key={i + 6}
+                        className={`p-2 rounded cursor-pointer ${
+                          i + 6 === 15 || i + 6 === 18 || i + 6 === 20
+                            ? 'bg-[#F1C232] text-gray-900 font-semibold'
+                            : i + 6 === 23
+                            ? 'bg-[#0A7A3B] text-white font-semibold'
+                            : 'hover:bg-gray-100'
+                        }`}
+                      >
+                        {i + 6}
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
 
-          {/* Newsletter Section */}
-          <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-primary mb-4">
-              Restez Informés
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Abonnez-vous à notre newsletter pour recevoir toutes les actualités de notre campagne
-              directement dans votre boîte mail.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              />
-              <Button variant="primary">
-                S&apos;abonner
-              </Button>
+            </aside>
             </div>
-          </div>
+          </main>
         </div>
       </div>
     </PageLayout>
