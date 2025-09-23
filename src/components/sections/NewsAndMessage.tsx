@@ -103,84 +103,15 @@ const NewsAndMessage: React.FC = () => {
                 <h3 className="font-inter text-2xl font-semibold text-black mb-6 text-center">
                   Dernières publications Facebook
                 </h3>
-                <div className="max-w-[800px] mx-auto">
+                <div className="max-w-[1200px] mx-auto">
                   <FacebookPostsBlock
                     pageId="61579187160785"
-                    limit={5}
-                    variant="compact"
+                    limit={6}
+                    variant="institutional"
                   />
                 </div>
               </div>
 
-              {/* Zone Actualités - 3 colonnes */}
-              <div className="mb-8">
-                <h3 className="font-inter text-2xl font-semibold text-black mb-6 text-center">
-                  Autres actualités
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {newsItems.map((item) => (
-                  <article
-                    key={item.id}
-                    className="bg-white cursor-pointer transition-all duration-200 border border-gray-200 hover:border-gray-300 flex flex-col"
-                    style={{ minHeight: '350px' }}
-                    onClick={() => {
-                      const baseUrl = item.type === 'article' ? '/actualites' : '/medias';
-                      window.location.href = `${baseUrl}/${item.slug}`;
-                    }}
-                  >
-                    {/* Image en haut - ratio 16:9, centrée */}
-                    <div className="relative bg-gray-100 overflow-hidden" style={{ aspectRatio: '16/9' }}>
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                        <span className="font-inter text-sm font-medium text-gray-600 text-center">
-                          {item.type === 'video' ? '🎥 Vidéo' : item.type === 'album' ? '📸 Album' : '📰 Article'}
-                          <br />
-                          <span className="text-xs">{item.lieu}</span>
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Contenu de la carte */}
-                    <div className="p-5 flex flex-col h-full">
-                      {/* Tag catégorie - centré */}
-                      <div className="text-center mb-3">
-                        <span className="inline-block font-inter text-xs font-medium text-white bg-primary px-3 py-1 rounded">
-                          {item.category}
-                        </span>
-                      </div>
-
-                      {/* Titre - centré */}
-                      <h3 className="font-inter text-lg font-bold text-black mb-3 text-center line-clamp-2">
-                        {item.title}
-                      </h3>
-
-                      {/* Extrait - justifié */}
-                      <p className="font-inter text-sm text-gray-700 mb-4 leading-relaxed flex-1" style={{ textAlign: 'justify' }}>
-                        {item.excerpt}
-                      </p>
-
-                      {/* Bas de carte */}
-                      <div className="mt-auto border-t border-gray-100 pt-3">
-                        <div className="flex justify-between items-center">
-                          <span className="font-inter text-xs text-gray-500">
-                            {item.date}
-                          </span>
-                          <button
-                            className="font-inter text-sm font-medium text-primary hover:underline"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const baseUrl = item.type === 'article' ? '/actualites' : '/medias';
-                              window.location.href = `${baseUrl}/${item.slug}`;
-                            }}
-                          >
-                            Lire la suite →
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
             </div>
           </div>
         </div>

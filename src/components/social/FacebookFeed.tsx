@@ -136,7 +136,12 @@ const FacebookFeed: React.FC<FacebookFeedProps> = ({
 // Déclaration TypeScript pour le SDK Facebook
 declare global {
   interface Window {
-    FB: any;
+    FB: {
+      init: (params: { appId?: string; version: string; xfbml?: boolean }) => void;
+      XFBML: {
+        parse: () => void;
+      };
+    };
   }
 }
 

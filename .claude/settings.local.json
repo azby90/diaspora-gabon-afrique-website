@@ -18,7 +18,8 @@
       "Bash(npx tsc:*)",
       "Bash(git merge:*)",
       "Bash(git fetch:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(npm run lint)"
     ],
     "deny": [],
     "ask": []
