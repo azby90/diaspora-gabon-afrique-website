@@ -8,6 +8,5 @@ export const navigationItems: NavigationItem[] = [
   { name: 'Accueil', href: '/' },
   { name: 'Biographies', href: '/biographies' },
   { name: 'Programme', href: '/programme' },
-  { name: 'Actualités & Médias', href: '/actualites-medias' },
   { name: 'Contact & S\'impliquer', href: '/contact-simpliquer' },
 ];
