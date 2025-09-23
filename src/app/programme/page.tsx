@@ -625,7 +625,7 @@ Ce programme n'est pas seulement une promesse électorale. C'est un contrat mora
           </div>
           <div style={{ textAlign: 'center' }}>
             <a
-              href="/doc/Projet UN Diaspora Afrique 2025.pdf"
+              href="/doc/PROJET.pdf#toolbar=0&navpanes=0&scrollbar=0"
               target="_blank"
               rel="noopener noreferrer"
               className="download-btn"
@@ -655,8 +655,8 @@ Ce programme n'est pas seulement une promesse électorale. C'est un contrat mora
             >
               <span style={{
                 fontSize: '1.2rem'
-              }}>📄</span>
-              Télécharger le programme complet (PDF)
+              }}>👁</span>
+              Voir le programme au complet
             </a>
           </div>
         </div>

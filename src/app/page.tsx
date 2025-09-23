@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import Hero from '@/components/layout/Hero';
-import NewsAndMessage from '@/components/sections/NewsAndMessage';
 
 export default function Home() {
   const [isLetterModalOpen, setIsLetterModalOpen] = useState(false);
@@ -60,18 +59,18 @@ export default function Home() {
                 </div>
 
                 {/* Contenu texte à droite */}
-                <div className="text-center lg:text-left px-4 lg:px-0">
+                <div className="px-4 lg:px-0">
                   {/* Titre aligné en haut */}
-                  <h2 className="font-inter text-2xl lg:text-3xl font-bold text-black mb-4">
+                  <h2 className="font-inter text-2xl lg:text-3xl font-bold text-black mb-4 text-center lg:text-left">
                     Lettre à la communauté
                   </h2>
 
                   {/* Texte introductif avec marges mobiles */}
                   <div className="mb-8 space-y-4 max-w-none lg:max-w-full">
-                    <p className="font-inter text-base text-gray-700 leading-relaxed px-2 lg:px-0" style={{ textAlign: 'justify' }}>
+                    <p className="font-inter text-base text-gray-700 leading-relaxed px-8 lg:px-0 text-justify">
                       Chers compatriotes de la diaspora gabonaise en Afrique, Professionnels, entrepreneurs, étudiants, familles, Le Gabon ne sera jamais plus fort que lorsque tous les Gabonais, où qu'ils soient, construisent ensemble son avenir. Il y a des moments dans l'histoire d'un pays où tout peut basculer. Nous vivons l'un de ces moments aujourd'hui. Pour la première fois, vous tous, Gabonais établis temporairement ou durablement en Afrique, avez la possibilité concrète de participer pleinement à la vie démocratique de votre pays.
                     </p>
-                    <p className="font-inter text-base text-gray-700 leading-relaxed px-2 lg:px-0" style={{ textAlign: 'justify' }}>
+                    <p className="font-inter text-base text-gray-700 leading-relaxed px-8 lg:px-0 text-justify">
                       Vous avez prouvé votre efficacité et votre sens des résultats. Cette élection représente un investissement stratégique majeur. En me choisissant, vous optez pour une représentation qui comprend les enjeux économiques, qui facilite vos projets d'investissement et qui défend concrètement vos intérêts business au Gabon. Agissons maintenant.
                     </p>
                   </div>
@@ -100,10 +99,143 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section Actualités + Lettre */}
-      <NewsAndMessage />
+      {/* Section Activité Récente */}
+      <section className="bg-white py-20">
+        <div className="w-full px-6">
+          <div className="flex justify-center">
+            <div className="w-full max-w-[900px] mx-auto text-center">
+              <h2 className="text-2xl font-bold text-gray-800 mb-24">
+                Activité Récente
+              </h2>
 
-      {/* Section Télécharger le programme */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-32">
+                {/* Article 1 */}
+                <article className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src="/images/hero/A1.jpg"
+                    alt="Grand Live TikTok : Pourquoi Angelina Nongou ?"
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                      🎯 Grand Live TikTok : Pourquoi Angelina Nongou ? 🌍✨
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      Ce soir, retrouvez un live exceptionnel autour d'Angelina NONGOU : Son parcours inspirant, son projet pour la diaspora, sa vision et ses engagements pour l'avenir 🌍 Un échange unique animé par Nephtali Nalick 🎤...
+                    </p>
+                    <div className="text-xs text-gray-500">
+                      📅 Mardi 23 Septembre - 21h à 23h selon les fuseaux horaires
+                    </div>
+                  </div>
+                </article>
+
+                {/* Article 2 */}
+                <article className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src="/images/hero/A2.jpg"
+                    alt="Tetegu Brunch - Rencontre avec les Gabonais du Ghana"
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                      Tetegu Brunch 🇬🇦 | Rencontre avec les Gabonais du Ghana 🍽🔥
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      Sous l'impulsion de l'Honorable Mme Angelina Nongou Mavikana, ne manquez pas le Tetegu Brunch : Une rencontre conviviale autour de la diaspora gabonaise au Ghana 🇬🇦 Échanges, partage et solidarité dans une ambiance fraternelle ✨
+                    </p>
+                    <div className="text-xs text-gray-500">
+                      📅 Jeudi 25 Septembre 2025 - À partir de 16h - Tetegu, Ghana
+                    </div>
+                  </div>
+                </article>
+
+                {/* Article 3 */}
+                <article className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src="/images/hero/A3.jpg"
+                    alt="Bénin, nous voilà - Ensemble avec la diaspora gabonaise"
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                      Bénin, nous voilà 🇧🇯✨ | Ensemble avec la diaspora gabonaise
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      Mon suppléant Ange Stephene Coudel Koumba est actuellement au Bénin pour porter avec conviction notre projet auprès de nos compatriotes gabonais. Aller vers vous, écouter vos attentes et défendre un projet ambitieux...
+                    </p>
+                    <div className="text-xs text-gray-500">
+                      📅 Élections législatives - 27 septembre 2025 - Diaspora Zone Afrique
+                    </div>
+                  </div>
+                </article>
+
+                {/* Article 4 */}
+                <article className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src="/images/hero/A4.jpg"
+                    alt="Maroc, me voilà - Rencontre avec la diaspora gabonaise"
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                      Maroc, me voilà 🇲🇦✨ | Rencontre avec la diaspora gabonaise
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      Après vos nombreux messages et encouragements, c'est avec une immense joie que je vous annonce ma présence au Maroc. 💚💛💙 Créer des espaces d'échange et de fraternité, permettre à chacun de faire un choix éclairé...
+                    </p>
+                    <div className="text-xs text-gray-500">
+                      📅 Élections législatives 2025 - Maroc & Tunisie - Dates à venir
+                    </div>
+                  </div>
+                </article>
+
+                {/* Article 5 */}
+                <article className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src="/images/hero/A5.jpg"
+                    alt="Tournoi de la Solidarité - Rendez-vous sportif et fraternel"
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                      ⚽🇬🇦 Tournoi de la Solidarité 🇬🇦⚽ | Rendez-vous sportif et fraternel
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      Je vous donne rendez-vous au Stade Sipres pour notre grand tournoi sportif sous mon parrainage. Un moment d'unité et de fraternité, un hommage vibrant à Feue Rose Francine Rogombé 🙏🏾. Venez nombreux !
+                    </p>
+                    <div className="text-xs text-gray-500">
+                      📅 Dimanche 21 septembre 2025 - Dès 9h - Stade Sipres
+                    </div>
+                  </div>
+                </article>
+
+                {/* Article 6 */}
+                <article className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src="/images/hero/A6.jpg"
+                    alt="Causerie Politique Ouest Foire - Rencontre avec la diaspora gabonaise"
+                    className="w-full h-48 object-cover rounded-t-lg"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                      Causerie Politique – Ouest Foire 🇬🇦✊🏾 | Rencontre avec la diaspora gabonaise
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      Je vous donne rendez-vous pour une causerie politique inédite à Ouest Foire. Un moment d'échanges directs, de dialogue et de proximité pour écouter vos préoccupations et partager notre vision commune 💚💛💙
+                    </p>
+                    <div className="text-xs text-gray-500">
+                      📅 19 septembre 2025 - 18h à 22h - Ouest Foire, Sénégal
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Section Voir le programme */}
       <section
         className="download-section"
         style={{
@@ -122,9 +254,9 @@ export default function Home() {
           Consulter le programme de société
         </span>
 
-        {/* Bouton Consulter le programme */}
+        {/* Bouton Voir le programme au complet */}
         <a
-          href="/doc/Projet UN Diaspora Afrique 2025.pdf"
+          href="/doc/PROJET.pdf#toolbar=0&navpanes=0&scrollbar=0"
           target="_blank"
           rel="noopener noreferrer"
           className="info-button"
@@ -166,9 +298,9 @@ export default function Home() {
               fontWeight: 'bold'
             }}
           >
-            i
+            👁
           </span>
-          EN SAVOIR PLUS
+          VOIR LE PROGRAMME AU COMPLET
         </a>
       </section>
 
