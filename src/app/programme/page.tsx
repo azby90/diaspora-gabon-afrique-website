@@ -1,9 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
+import SecurePDFViewer from '@/components/pdf/SecurePDFViewer';
 
 const ProgrammePage: React.FC = () => {
+  const [isPDFViewerOpen, setIsPDFViewerOpen] = useState(false);
+
   const piliers = [
     {
       num: "I",
@@ -624,10 +627,8 @@ Ce programme n'est pas seulement une promesse électorale. C'est un contrat mora
             </p>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <a
-              href="/doc/PROJET.pdf#toolbar=0&navpanes=0&scrollbar=0"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setIsPDFViewerOpen(true)}
               className="download-btn"
               style={{
                 display: 'inline-flex',
@@ -642,7 +643,9 @@ Ce programme n'est pas seulement une promesse électorale. C'est un contrat mora
                 fontSize: '1rem',
                 fontWeight: '600',
                 boxShadow: '0 8px 25px rgba(30, 64, 175, 0.3)',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                border: 'none',
+                cursor: 'pointer'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-3px)';
@@ -657,7 +660,7 @@ Ce programme n'est pas seulement une promesse électorale. C'est un contrat mora
                 fontSize: '1.2rem'
               }}>👁</span>
               Voir le programme au complet
-            </a>
+            </button>
           </div>
         </div>
 
@@ -698,6 +701,13 @@ Ce programme n'est pas seulement une promesse électorale. C'est un contrat mora
           }
         `}</style>
       </div>
+
+      {/* Visionneuse PDF sécurisée */}
+      <SecurePDFViewer
+        isOpen={isPDFViewerOpen}
+        onClose={() => setIsPDFViewerOpen(false)}
+        pdfUrl="/doc/PROJET.pdf"
+      />
     </PageLayout>
   );
 };

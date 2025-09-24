@@ -19,7 +19,15 @@
       "Bash(git merge:*)",
       "Bash(git fetch:*)",
       "Bash(curl:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(git config:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(pkill:*)",
+      "Bash(taskkill:*)",
+      "Bash(npm start)",
+      "Bash(npx next start:*)",
+      "Bash(unzip:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import Hero from '@/components/layout/Hero';
+import SecurePDFViewer from '@/components/pdf/SecurePDFViewer';
 
 export default function Home() {
   const [isLetterModalOpen, setIsLetterModalOpen] = useState(false);
+  const [isPDFViewerOpen, setIsPDFViewerOpen] = useState(false);
 
   // Gestion de la fermeture du modal avec ESC
   useEffect(() => {
@@ -255,10 +257,8 @@ export default function Home() {
         </span>
 
         {/* Bouton Voir le programme au complet */}
-        <a
-          href="/doc/PROJET.pdf#toolbar=0&navpanes=0&scrollbar=0"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => setIsPDFViewerOpen(true)}
           className="info-button"
           style={{
             backgroundColor: '#1e40af',
@@ -301,7 +301,7 @@ export default function Home() {
             👁
           </span>
           VOIR LE PROGRAMME AU COMPLET
-        </a>
+        </button>
       </section>
 
       {/* Modal pour la lettre complète */}
@@ -387,6 +387,13 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Visionneuse PDF sécurisée */}
+      <SecurePDFViewer
+        isOpen={isPDFViewerOpen}
+        onClose={() => setIsPDFViewerOpen(false)}
+        pdfUrl="/doc/PROJET.pdf"
+      />
     </PageLayout>
   );
 }
